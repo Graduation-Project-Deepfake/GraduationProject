@@ -53,17 +53,19 @@
                         src="<%= each_image %>"
                         class="faces"
                         width="auto"
-                        height="150"
+                        height="200"
                     />
                     <% }); %>
                 </div>
             </div>
-            <div class="row">
+        </div>
+        <div class="result text-center" style="padding-top: 50px">
+
                 <div class="col-12">
                     <video
                         id="video"
-                        width="100%"
-                        height="auto"
+                        width="500px"
+                        height="500px"
                         controls
                         autoplay
                         muted
@@ -73,8 +75,10 @@
                         <source src="/deepfake/<%= video%>" type="video/mp4" />
                     </video>
                 </div>
-            </div>
         </div>
+    </div>
+    </div>
+
 
         <% } %>
 

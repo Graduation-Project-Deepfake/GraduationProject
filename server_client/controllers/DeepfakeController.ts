@@ -50,8 +50,8 @@ export const createdeepfake = asyncHandler(
         const uploadedFile = req.file;
         // Process the uploaded video here (e.g., save to a database, perform operations, etc.)
         req.body.video = uploadedFile.originalname;
-         //console.log(req.body.video);
-            video=req.body.video;
+        console.log(req.body.video);
+        video=req.body.video;
          io.emit('data',req.body.video)
         const document = await deepfake.create({ video: req.body.video });
         res.status(201).json({ data: document });
