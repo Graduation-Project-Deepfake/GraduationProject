@@ -32,54 +32,53 @@
             </section>
         </div>
         <% } else { %>
-        <div class="container">
-            <div class="row">
+            <div  style="padding: 50px;">
                 <h3>Frames Split</h3>
-                <div id="preprocessed_images" class="col-12 mt-10 mb-3">
-                    <% preprocessed_images.forEach(function(each_image) { %>
-                    <img
-                        src="/frames/<%= each_image %>"
-                        class="preprocess"
-                        width="auto"
-                        height="250"
-                    />
-                    <% }); %>
+                <div class="result text-center" style="padding-top: 50px">
+                    <div id="preprocessed_images" class="col-12 mt-10 mb-3">
+                        <% preprocessed_images.forEach(function(each_image) { %>
+                        <img
+                            src="/frames/<%= each_image %>"
+                            class="preprocess"
+                            width="auto"
+                            height="250"
+                        />
+                        <% }); %>
+                    </div>
                 </div>
-
                 <h3>Face Cropped Frames</h3>
-                <div id="faces_images" class="col-12 mt-10 mb-2">
-                    <% faces_cropped_images.forEach(function(each_image) { %>
-                    <img
-                        src="/faces/<%= each_image %>"
-                        class="faces"
-                        width="auto"
-                        height="200"
-                    />
-                    <% }); %>
+                    <div class="result text-center" style="padding-top: 50px">
+                    <div id="faces_images" class="col-12 mt-10 mb-2">
+                        <% faces_cropped_images.forEach(function(each_image) { %>
+                        <img
+                            src="/faces/<%= each_image %>"
+                            class="faces"
+                            width="auto"
+                            height="200"
+                        />
+                        <% }); %>
+                    </div>
                 </div>
+            <div class="result text-center" style="padding-top: 50px">
+    
+                    <div class="col-12">
+                        <video
+                            id="video"
+                            width="500px"
+                            height="400px"
+                            controls
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                        >
+                            <source src="/deepfake/<%= video%>" type="video/mp4" />
+                        </video>
+                    </div>
             </div>
         </div>
-        <div class="result text-center" style="padding-top: 50px">
-
-                <div class="col-12">
-                    <video
-                        id="video"
-                        width="500px"
-                        height="500px"
-                        controls
-                        autoplay
-                        muted
-                        loop
-                        playsinline
-                    >
-                        <source src="/deepfake/<%= video%>" type="video/mp4" />
-                    </video>
-                </div>
         </div>
-    </div>
-    </div>
-
-
+            </div>
         <% } %>
 
         <!-- Display the message if available -->
