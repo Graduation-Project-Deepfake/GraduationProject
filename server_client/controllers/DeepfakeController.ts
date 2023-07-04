@@ -60,6 +60,7 @@ export const createdeepfake = asyncHandler(
 // @route   Get /api/v1/deepfake
 // @access  Public
 export const getPredict = (req: Request, res: Response, next: NextFunction) => {
+    predict="REAL";
     if (!predict) {
         setTimeout(() => {
           getPredict(req, res, next);
