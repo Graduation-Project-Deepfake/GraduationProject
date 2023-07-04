@@ -1,25 +1,4 @@
-body {
-    height: 100%;
-}
-.bg {
-    /* The image used */
-    background-image: url("/static/images/background1.png");
-  
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-  
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 
-
-}
-
-section{
-    padding-top: 60px;
-}
 
 .width-300{
     width: 300px;

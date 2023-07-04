@@ -16,6 +16,7 @@ const app = express();
      },
  });
  let predict="";
+ let video="";
  io.on('connection', async (socket) => {
      socket.on('prediction', async (prediction) => {
         predict=prediction;
@@ -50,6 +51,7 @@ export const createdeepfake = asyncHandler(
         // Process the uploaded video here (e.g., save to a database, perform operations, etc.)
         req.body.video = uploadedFile.originalname;
          //console.log(req.body.video);
+            video=req.body.video;
          io.emit('data',req.body.video)
         const document = await deepfake.create({ video: req.body.video });
         res.status(201).json({ data: document });
@@ -59,6 +61,9 @@ export const createdeepfake = asyncHandler(
 // @desc    Get Single video for deepfake
 // @route   Get /api/v1/deepfake
 // @access  Public
+let preprocessed_images = ["",""];
+let faces_cropped_images=["",""];
+const no_faces = false;
 export const getPredict = (req: Request, res: Response, next: NextFunction) => {
     predict="REAL";
     if (!predict) {
@@ -66,6 +71,6 @@ export const getPredict = (req: Request, res: Response, next: NextFunction) => {
           getPredict(req, res, next);
         }, 100);
        } else {
-        res.render('deepfake', { message: predict });
+        res.render('deepfake', { message: predict ,preprocessed_images,faces_cropped_images,no_faces ,video});
        }
 };

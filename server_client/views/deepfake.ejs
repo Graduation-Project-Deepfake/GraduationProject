@@ -7,9 +7,9 @@
         <title>scanner</title>
         <link rel="stylesheet" href="/css/nav-bar.css" />
         <link rel="stylesheet" href="/css/style.css" />
-        <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/jquery-ui.css">
-        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/jquery-ui.css" />
+        <link rel="stylesheet" href="/css/styles.css" />
     </head>
     <body>
         <div class="header">
@@ -20,20 +20,91 @@
                 <a href="#about">About</a>
             </div>
         </div>
-        <div class="text">
-            <h1>Scan & Detect Deepfake Videos</h1>
+        <div class="text" style="padding-bottom: 50px">
+            <h1>Detected Video</h1>
         </div>
-        <!-- Display the message if available -->
-        <% if (message == "REAL") { %>
-        <h4 class="mx-auto">Result: <span style="color:green"><%= output %></span>
-        <img src="../public/images/thumpup.png" alt="real" height="100px" width="auto">
+        <% if (no_faces) { %>
+        <div class="container">
+            <section>
+                <div class="alert alert-danger">
+                    No faces detected. Cannot process the video.
+                </div>
+            </section>
+        </div>
+        <% } else { %>
+        <div class="container">
+            <div class="row">
+                <h3>Frames Split</h3>
+                <div id="preprocessed_images" class="col-12 mt-10 mb-3">
+                    <% preprocessed_images.forEach(function(each_image) { %>
+                    <img
+                        src="<%= each_image %>"
+                        class="preprocess"
+                        width="auto"
+                        height="250"
+                    />
+                    <% }); %>
+                </div>
+
+                <h3>Face Cropped Frames</h3>
+                <div id="faces_images" class="col-12 mt-10 mb-2">
+                    <% faces_cropped_images.forEach(function(each_image) { %>
+                    <img
+                        src="<%= each_image %>"
+                        class="faces"
+                        width="auto"
+                        height="150"
+                    />
+                    <% }); %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <video
+                        id="video"
+                        width="100%"
+                        height="auto"
+                        controls
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                    >
+                        <source src="/deepfake/<%= video%>" type="video/mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+
         <% } %>
-        <% else { %>
-        <h4 class="mx-auto">Result: <span style="color:red"><%= output %></span>
-        <img src="images/thumpdown.png" alt="fake" height="100px" width="auto" >
-        <% }%>
-        <script src="js/face-api.min.js"></script>
-        <script src="/js/jquery-3.4.1.min.js" ></script>
+
+        <!-- Display the message if available -->
+        <div class="result text-center" style="padding-top: 50px">
+            <% if (message == "REAL") { %>
+            <h4 class="mx-auto">
+                Result: <span style="color: green"><%= message %></span>
+                <img
+                    src="/images/thumpup.png"
+                    alt="real"
+                    height="100px"
+                    width="auto"
+                />
+            </h4>
+            <% } else { %>
+            <h4 class="mx-auto">
+                Result: <span style="color: red"><%= message %></span>
+                <img
+                    src="/images/thumpdown.png"
+                    alt="fake"
+                    height="100px"
+                    width="auto"
+                />
+            </h4>
+            <% } %>
+        </div>
+        <script src="/javascript/deepfake.js"></script>
+        <script src="/js/face-api.min.js"></script>
+        <script src="/js/jquery-3.4.1.min.js"></script>
         <script src="/js/popper.min.js"></script>
         <script src="/js/jquery-ui.min.js"></script>
         <script src="/javascript/scanner.js"></script>
