@@ -38,7 +38,7 @@
                 <div id="preprocessed_images" class="col-12 mt-10 mb-3">
                     <% preprocessed_images.forEach(function(each_image) { %>
                     <img
-                        src="<%= each_image %>"
+                        src="/frames/<%= each_image %>"
                         class="preprocess"
                         width="auto"
                         height="250"
@@ -50,7 +50,7 @@
                 <div id="faces_images" class="col-12 mt-10 mb-2">
                     <% faces_cropped_images.forEach(function(each_image) { %>
                     <img
-                        src="<%= each_image %>"
+                        src="/faces/<%= each_image %>"
                         class="faces"
                         width="auto"
                         height="200"

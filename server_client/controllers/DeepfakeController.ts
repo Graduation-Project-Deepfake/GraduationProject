@@ -61,8 +61,8 @@ export const createdeepfake = asyncHandler(
 // @desc    Get Single video for deepfake
 // @route   Get /api/v1/deepfake
 // @access  Public
-let preprocessed_images = ["",""];
-let faces_cropped_images=["",""];
+let preprocessed_images = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"];
+let faces_cropped_images=["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg"];
 const no_faces = false;
 export const getPredict = (req: Request, res: Response, next: NextFunction) => {
     predict="REAL";
