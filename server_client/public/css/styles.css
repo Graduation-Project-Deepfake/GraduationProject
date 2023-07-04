@@ -1,13 +1,11 @@
-
-
-.width-300{
+.width-300 {
     width: 300px;
     margin: auto;
     padding: 20px;
     box-shadow: 0 0px 9px 2px #ccc;
 }
 
-.width-400{
+.width-400 {
     width: 400px;
     margin: auto;
     padding: 20px;
@@ -16,15 +14,15 @@
     box-shadow: 0 0px 9px 2px #ccc;
 }
 
-.width-500{
+.width-500 {
     width: 500px;
     margin: auto;
     padding: 20px;
     box-shadow: 0 0px 9px 2px #ccc;
 }
 
-#videos{
-    display: none;
+#videos {
+    display: block;
 }
 
 canvas {
@@ -39,13 +37,13 @@ canvas {
 }
 
 #preprocessed_images {
-  white-space: nowrap;
-  width: auto;
-  height: 250px;
-  padding: 20px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  box-shadow: 0 0px 9px 2px #ccc;
+    white-space: nowrap;
+    width: auto;
+    height: 250px;
+    padding: 20px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    box-shadow: 0 0px 9px 2px #ccc;
 }
 
 #faces_images {
@@ -63,7 +61,7 @@ canvas {
     padding-bottom: 50px;
 }
 
-#heatmap_images{
+#heatmap_images {
     white-space: nowrap;
     width: auto;
     height: 200px;
