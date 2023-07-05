@@ -64,7 +64,6 @@ let preprocessed_images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
 let faces_cropped_images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
 const no_faces = false;
 export const getPredict = (req: Request, res: Response, next: NextFunction) => {
-    predict = 'REAL';
     if (!predict) {
         setTimeout(() => {
             getPredict(req, res, next);
