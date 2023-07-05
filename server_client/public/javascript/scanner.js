@@ -4,7 +4,12 @@ const chooseVideoBtn = document.getElementById('chooseVideoBtn');
 const detectVideoBtn = document.getElementById('detectVideoBtn');
 const selectTxt = document.getElementById('selectTxt');
 const formData = new FormData(); // Move the declaration here
-
+const style = `text-decoration: none;
+        background-color: #ffffff;
+        color: dodgerblue;
+        padding: 10px 20px;
+        border: none;
+        outline: 1px solid #010101;`;
 // Add an event listener to the file input element
 fileInput.addEventListener('change', () => {
     const file = fileInput.files[0]; // Get the selected file
@@ -13,12 +18,6 @@ fileInput.addEventListener('change', () => {
         formData.append('video', file);
         console.log('Uploading file:', file);
         console.log(formData);
-        const style = `text-decoration: none;
-        background-color: #ffffff;
-        color: dodgerblue;
-        padding: 10px 20px;
-        border: none;
-        outline: 1px solid #010101;`;
         chooseVideoBtn.title = 'Uploading...'; // Change the button title text
         chooseVideoBtn.textContent = 'Uploading...'; // Change the button text
         chooseVideoBtn.disabled = true; // Disable the button
@@ -29,17 +28,22 @@ fileInput.addEventListener('change', () => {
         setTimeout(() => {
             chooseVideoBtn.style.display = 'none'; // Hide the button
             detectVideoBtn.style.display = 'block'; // Show the button
-        }, 5000); // Delay execution for 5 seconds (5000 milliseconds)
+        }, 2000); // Delay execution for 2 seconds (2000 milliseconds)
     }
 });
 
 // Add an event listener to the choose video button
 chooseVideoBtn.addEventListener('click', () => {
+            
     fileInput.click(); // Trigger the file input click event
 });
 
 // Add an event listener to the detect video button
 detectVideoBtn.addEventListener('click', () => {
+    detectVideoBtn.title = 'Detecting...'; // Change the button title text
+    detectVideoBtn.textContent = 'Detecting...'; // Change the button text
+    detectVideoBtn.disabled = true; // Disable the button
+    detectVideoBtn.style = style;
     // Make an AJAX request to upload the file
     fetch('/api/v1/deepfake/', {
         method: 'POST',

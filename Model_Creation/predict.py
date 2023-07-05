@@ -52,7 +52,7 @@ def im_convert(tensor):
     image = image.numpy()
     image = image.transpose(1,2,0)
     image = image.clip(0, 1)
-    cv2.imwrite('./v2.jpg',image*255)
+    # cv2.imwrite('./v2.jpg',image*255)
     return image
 
 def predict(model,img,path = './'):
@@ -74,7 +74,7 @@ def predict(model,img,path = './'):
   heatmap = cv2.applyColorMap(out, cv2.COLORMAP_JET)
   img = im_convert(img[:,-1,:,:,:])
   result = heatmap * 0.5 + img*0.8*255
-  cv2.imwrite('v1.png',result)
+#   cv2.imwrite('v1.png',result)
   result1 = heatmap * 0.5/255 + img*0.8
   r,g,b = cv2.split(result1)
   result1 = cv2.merge((r,g,b))

@@ -51,13 +51,20 @@ export const uploaddeepfakeVideo = uploadSingleVideo('video');
 // @access  Private
 export const createdeepfake = asyncHandler(
     async (req: Request, res: Response): Promise<void> => {
+        // Reset the values to their initial state or empty them
+        predict = '';
+        preprocessed_images = [];
+        faces_cropped_images = [];
+        video = '';
         if (!req.file) {
             res.status(400).json({ error: 'No file uploaded.' });
             return;
         }
         const uploadedFile = req.file;
         req.body.video = uploadedFile.originalname;
-        video = `/deepfake/${req.body.video}`;
+        video = req.body.video;
+        console.log(video);
+
         // Emit the video name to the client
         io.emit('response', req.body.video);
 
@@ -80,11 +87,11 @@ export const getPredict = (req: Request, res: Response, next: NextFunction) => {
     } else {
         res.render('deepfake', {
             message: predict,
-            preprocessed_images,
-            faces_cropped_images,
+            preprocessed_images: preprocessed_images,
+            faces_cropped_images: faces_cropped_images,
             no_faces,
-            video,
+            video: video,
         });
-            
+        
     }
 };
