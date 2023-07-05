@@ -1,7 +1,6 @@
 from datetime import timedelta
 import cv2
 import numpy as np
-import pandas as pd
 import os
 import dlib
 SAVING_FRAMES_PER_SECOND = 2

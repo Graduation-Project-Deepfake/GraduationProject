@@ -16,20 +16,20 @@ const io = new Server(serverio, {
     },
 });
 let predict = '';
-let preprocessed_images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
-let faces_cropped_images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
+let preprocessed_images = [''];
+let faces_cropped_images = [''];
 let video = '';
 io.on('connection', async (socket) => {
     socket.on('prediction', async (prediction) => {
-        predict = prediction;
+        predict = await prediction;
         console.log(prediction);
     });
     socket.on('preproc_images', async (preproc_images) => {
-        preprocessed_images = preproc_images;
+        preprocessed_images = await preproc_images;
         console.log(preproc_images);
     });
     socket.on('faces_images', async (faces_images) => {
-        faces_cropped_images = faces_images;
+        faces_cropped_images = await faces_images;
         console.log(faces_images);
     });
 
@@ -55,13 +55,13 @@ export const createdeepfake = asyncHandler(
             res.status(400).json({ error: 'No file uploaded.' });
             return;
         }
-        // Access the uploaded file using req.file
         const uploadedFile = req.file;
-        // Process the uploaded video here (e.g., save to a database, perform operations, etc.)
         req.body.video = uploadedFile.originalname;
-        console.log(req.body.video);
-        video = '1.mp4';
-        io.emit('data', req.body.video);
+
+        // Emit the video name to the client
+        io.emit('response', req.body.video);
+
+        // Process the uploaded video and create the deepfake document
         const document = await deepfake.create({ video: req.body.video });
         res.status(201).json({ data: document });
     }
@@ -73,7 +73,7 @@ export const createdeepfake = asyncHandler(
 
 const no_faces = false;
 export const getPredict = (req: Request, res: Response, next: NextFunction) => {
-    if (!predict) {
+    if (!predict||!preprocessed_images||!faces_cropped_images) {
         setTimeout(() => {
             getPredict(req, res, next);
         }, 100);
