@@ -10,9 +10,9 @@ import {
 const router = express.Router();
 
 /* GET home page. */
-router.route('/').get(get_home, removeDeepfake, removeFrame, removeFace);
+router.route('/').get(removeDeepfake, removeFrame, removeFace,get_home);
 router
     .route('/scanner')
-    .get(getScanner, removeDeepfake, removeFrame, removeFace);
+    .get(removeDeepfake, removeFrame, removeFace,getScanner);
 
 export default router;

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import { Server } from 'socket.io';
+import { spawn } from 'child_process';
 import { uploadSingleVideo } from '../middlewares/uploadVideoMiddleware';
 import deepfake from '../models/deepfakeModel';
 // Express app
@@ -51,6 +52,33 @@ export const uploaddeepfakeVideo = uploadSingleVideo('video');
 // @access  Private
 export const createdeepfake = asyncHandler(
     async (req: Request, res: Response): Promise<void> => {
+        // Define the Python file path
+        const pythonFilePath = '../Model_Creation/usingSocket.py';
+
+        // Spawn a new process and execute the Python file
+        const pythonProcess = spawn('python', [pythonFilePath]);
+        // Listen for output from the Python process
+        pythonProcess.stdout.on('data', (data) => {
+            console.log(`Python script output: ${data}`);
+        });
+        pythonProcess.stderr.on('data', (data) => {
+            console.error(`Python script error: ${data}`);
+        });
+        // Listen for any errors that occur during the execution of the Python process
+        pythonProcess.on('error', (error) => {
+            console.error(
+                'An error occurred while running the Python script:',
+                error
+            );
+        });
+
+        // Listen for the Python process to exit
+        pythonProcess.on('exit', (code, signal) => {
+            console.log(
+                `Python script exited with code ${code} and signal ${signal}`
+            );
+        });
+
         // Reset the values to their initial state or empty them
         predict = '';
         preprocessed_images = [];
@@ -92,6 +120,5 @@ export const getPredict = (req: Request, res: Response, next: NextFunction) => {
             no_faces,
             video: video,
         });
-        
     }
 };

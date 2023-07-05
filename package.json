@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run-python": "cd Model_Creation && python usingSocket.py",
+    "run-server": "cd server_client && npm run start:dev",
+    "project": "npm run run-server && npm run run-python"
   },
   "author": "",
   "license": "ISC"
