@@ -26,6 +26,10 @@ def get_saving_frames_durations(cap, saving_fps):
     # use np.arange() to make floating-point steps
     for i in np.arange(0, clip_duration, 1 / saving_fps):
         s.append(i)
+
+        # if i >9:
+        #     break
+    print(s)
     return s
 
 def solve(video_file,face_path,frame_path):
@@ -41,6 +45,7 @@ def solve(video_file,face_path,frame_path):
     cap = cv2.VideoCapture(video_file)
     fps = cap.get(cv2.CAP_PROP_FPS)
     saving_frames_per_second = min(fps, SAVING_FRAMES_PER_SECOND)
+    print(f"Saving frames at {saving_frames_per_second} fps")
     saving_frames_durations = get_saving_frames_durations(cap, saving_frames_per_second)
     count = 0
     while True:
@@ -60,7 +65,7 @@ def solve(video_file,face_path,frame_path):
                 y = face.top()
                 w = face.right() - x
                 h = face.bottom() - y
-                print(x,y,w,h)
+                # print(x,y,w,h)
                 img=frame[y:y+h,x:x+w]
                 try:
                     img=cv2.resize(img,(128,128),interpolation=cv2.INTER_AREA)
@@ -69,7 +74,7 @@ def solve(video_file,face_path,frame_path):
                     cv2.imwrite(os.path.join(frame_path, f"video{video_name[-1]}frame{frame_duration_formatted}.jpg"), frame)
                     face_list.append(f"video{video_name[-1]}face{frame_duration_formatted}.jpg")
                     frame_list.append(f"video{video_name[-1]}frame{frame_duration_formatted}.jpg")
-                    exceptving_frames_durations.pop(0)
+                    saving_frames_durations.pop(0)
                 except:
                     pass
            

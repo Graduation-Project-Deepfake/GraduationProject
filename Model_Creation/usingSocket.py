@@ -6,7 +6,7 @@ sio = socketio.Client()
 preproc_images = []
 faces_images = []
 video_name = ""
-
+sio.connect('http://localhost:3000')
 @sio.event
 def connect():
     print('Connected to server')
@@ -30,17 +30,10 @@ def response(video):
     # Emit preproc_images and faces_images to the server
     sio.emit('preproc_images', preproc_images)
     sio.emit('faces_images', faces_images)
-
-sio.connect('http://localhost:3000')
-sio.wait()
-
-@sio.event
-def prediction_result(data):
-    print('Prediction:', data)
-
-if makePredict("fake1.mp4") == "REAL":
-    print("REAL")
-    sio.emit('prediction', "REAL")
-else:
-    print("FAKE")
-    sio.emit('prediction', "FAKE")
+    print(video_name)
+    if makePredict(video_name) == "REAL":
+        print("REAL")
+        sio.emit('prediction', "REAL")
+    else:
+        print("FAKE")
+        sio.emit('prediction', "FAKE")

@@ -57,7 +57,7 @@ export const createdeepfake = asyncHandler(
         }
         const uploadedFile = req.file;
         req.body.video = uploadedFile.originalname;
-
+        video = `/deepfake/${req.body.video}`;
         // Emit the video name to the client
         io.emit('response', req.body.video);
 
@@ -73,7 +73,7 @@ export const createdeepfake = asyncHandler(
 
 const no_faces = false;
 export const getPredict = (req: Request, res: Response, next: NextFunction) => {
-    if (!predict||!preprocessed_images||!faces_cropped_images) {
+    if (!predict || !preprocessed_images || !faces_cropped_images) {
         setTimeout(() => {
             getPredict(req, res, next);
         }, 100);
@@ -85,5 +85,6 @@ export const getPredict = (req: Request, res: Response, next: NextFunction) => {
             no_faces,
             video,
         });
+            
     }
 };

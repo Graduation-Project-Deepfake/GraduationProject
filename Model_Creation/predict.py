@@ -78,8 +78,8 @@ def predict(model,img,path = './'):
   result1 = heatmap * 0.5/255 + img*0.8
   r,g,b = cv2.split(result1)
   result1 = cv2.merge((r,g,b))
-  plt.imshow(result1)
-  plt.show()
+#   plt.imshow(result1)
+#   plt.show()
   return [int(prediction.item()),confidence]
 import torch
 import torchvision
