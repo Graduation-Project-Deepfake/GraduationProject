@@ -16,11 +16,21 @@ const io = new Server(serverio, {
     },
 });
 let predict = '';
+let preprocessed_images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
+let faces_cropped_images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
 let video = '';
 io.on('connection', async (socket) => {
     socket.on('prediction', async (prediction) => {
         predict = prediction;
         console.log(prediction);
+    });
+    socket.on('preproc_images', async (preproc_images) => {
+        preprocessed_images = preproc_images;
+        console.log(preproc_images);
+    });
+    socket.on('faces_images', async (faces_images) => {
+        faces_cropped_images = faces_images;
+        console.log(faces_images);
     });
 
     socket.on('disconnect', () => {
@@ -60,8 +70,7 @@ export const createdeepfake = asyncHandler(
 // @desc    Get Single video for deepfake
 // @route   Get /api/v1/deepfake
 // @access  Public
-let preprocessed_images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
-let faces_cropped_images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'];
+
 const no_faces = false;
 export const getPredict = (req: Request, res: Response, next: NextFunction) => {
     if (!predict) {

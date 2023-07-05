@@ -30,6 +30,8 @@ def get_saving_frames_durations(cap, saving_fps):
     return s
 
 def solve(video_file,face_path,frame_path):
+    face_list=[]
+    frame_list=[]
     filename, _ = os.path.splitext(video_file)
     filename += "-opencv"
     video_name=video_file.split("\\")
@@ -64,8 +66,10 @@ def solve(video_file,face_path,frame_path):
                 try:
                     img=cv2.resize(img,(128,128),interpolation=cv2.INTER_AREA)
                     frame=cv2.resize(frame,(128,128),interpolation=cv2.INTER_AREA)
-                    cv2.imwrite(os.path.join(face_path, f"video{video_name[-1]}frame{frame_duration_formatted}.jpg"), img)
+                    cv2.imwrite(os.path.join(face_path, f"video{video_name[-1]}face{frame_duration_formatted}.jpg"), img)
                     cv2.imwrite(os.path.join(frame_path, f"video{video_name[-1]}frame{frame_duration_formatted}.jpg"), frame)
+                    face_list.append(f"video{video_name[-1]}face{frame_duration_formatted}.jpg")
+                    frame_list.append(f"video{video_name[-1]}frame{frame_duration_formatted}.jpg")
                     exceptving_frames_durations.pop(0)
                 except:
                     pass
@@ -75,3 +79,4 @@ def solve(video_file,face_path,frame_path):
         count += 1
     cap.release()
     cv2.destroyAllWindows()
+    return face_list,frame_list
