@@ -26,7 +26,7 @@
                     <h3>Upload Video</h3>
                     <div class="drop_box">
                         <header>
-                            <h4>Select File here</h4>
+                            <h4 id="selectTxt">Select Video here</h4>
                         </header>
                         <p>Files Supported: mp4</p>
                         <input
@@ -36,8 +36,22 @@
                             id="fileID"
                             style="display: none"
                         />
-                        <button class="btn" id="chooseVideoBtn" type="button">
+                        <button
+                            class="btn"
+                            id="chooseVideoBtn"
+                            type="button"
+                            title="Choose Video"
+                        >
                             Choose Video
+                        </button>
+                        <button
+                            class="btn"
+                            id="detectVideoBtn"
+                            type="button"
+                            style="display: none"
+                            title="Detect Video"
+                        >
+                            Detect Video
                         </button>
                     </div>
                 </div>
